@@ -17,7 +17,7 @@ public class InputView {
         }
     }
 
-    public String getNameAndNumber() {
+    public String getNameAndQuantity() {
         System.out.println(Message.INPUT_NAME_NUMBER.getMessage());
         return Console.readLine();
     }
