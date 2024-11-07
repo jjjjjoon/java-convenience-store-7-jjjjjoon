@@ -16,7 +16,8 @@ public class ProductsLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(Constants.FILE_PATH))) {
             readLinesAndAddToProducts(br, products);
         } catch (IOException e) {
-            System.err.println("Error reading products file: " + e.getMessage());
+//            System.err.println("Error reading products file: " + e.getMessage());
+            throw new IllegalArgumentException("데이터 로딩 실패했어여!!!!");
         }
         return products;
     }
@@ -24,22 +25,34 @@ public class ProductsLoader {
     private static void readLinesAndAddToProducts(BufferedReader br, List<ProductsLoaderDTO> products) throws IOException {
         String line;
         while ((line = br.readLine()) != null) {
-            ProductsLoaderDTO dto = parseLineToDTO(line);
+            ProductsLoaderDTO dto = parseProductsLine(line);
             if (dto != null) {
                 products.add(dto);
             }
         }
     }
 
-    private static ProductsLoaderDTO parseLineToDTO(String line) {
-        String[] values = line.split(",");
+    private static ProductsLoaderDTO parseProductsLine(String line) {
+        String[] values = splitProductsLine(line);
         if (values.length == 4) {
             String name = values[0];
             int price = Integer.parseInt(values[1]);
             int quantity = Integer.parseInt(values[2]);
-            String promotion = values[3].equals("null") ? null : values[3];
+            String promotion = parseNullValue(values[3]);
             return new ProductsLoaderDTO(name, price, quantity, promotion);
         }
         return null; // 데이터가 4개가 아닐 경우 null 반환
     }
+
+    private static String[] splitProductsLine(String line) {
+        return line.split(",");
+    }
+
+    private static String parseNullValue(String value) {
+        if ("null".equals(value)) {
+            return null;
+        }
+        return value;
+    }
+
 }
