@@ -14,6 +14,7 @@ public class ProductsLoader {
     public static List<ProductsLoaderDTO> loadProducts() {
         List<ProductsLoaderDTO> products = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(Constants.FILE_PATH))) {
+            String line = br.readLine();
             readLinesAndAddToProducts(br, products);
         } catch (IOException e) {
             throw new IllegalArgumentException("데이터 로딩 실패했어여!!!!");
