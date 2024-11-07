@@ -1,31 +1,31 @@
 package store.dto;
 
 public class ProductsLoaderDTO {
-    private final String productName;
-    private final int productPrice;
-    private final int productQuantity;
-    private final String productPromotion;
+    private final String name;
+    private final int price;
+    private final int quantity;
+    private final String promotion;
 
-    public ProductLoaderDTO(String productName, int productPrice, int productQuantity, String productPromotion) {
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.productQuantity = productQuantity;
-        this.productPromotion = productPromotion;
+    public ProductsLoaderDTO(String name, int price, int quantity, String promotion) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.promotion = promotion;
     }
 
     public String getProductName() {
-        return productName;
+        return name;
     }
 
     public int getProductPrice() {
-        return productPrice;
+        return price;
     }
 
     public int getProductQuantity() {
-        return productQuantity;
+        return quantity;
     }
 
     public String getProductPromotion() {
-        return productPromotion;
+        return promotion;
     }
 }
