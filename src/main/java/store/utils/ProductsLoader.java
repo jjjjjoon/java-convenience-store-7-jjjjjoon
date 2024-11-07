@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import store.constant.Constants;
+import store.constant.ErrorMessage;
 import store.dto.ProductsLoaderDTO;
 
 public class ProductsLoader {
@@ -14,15 +15,17 @@ public class ProductsLoader {
     public static List<ProductsLoaderDTO> loadProducts() {
         List<ProductsLoaderDTO> products = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(Constants.FILE_PATH))) {
-            String line = br.readLine();
+            br.readLine();
             readLinesAndAddToProducts(br, products);
         } catch (IOException e) {
-            throw new IllegalArgumentException("데이터 로딩 실패했어여!!!!");
+            throw new IllegalArgumentException(
+                    ErrorMessage.DEFAULT_HEADER_MESSAGE.getMessage() + ErrorMessage.FAILED_LOAD_FILE.getMessage());
         }
         return products;
     }
 
-    private static void readLinesAndAddToProducts(BufferedReader br, List<ProductsLoaderDTO> products) throws IOException {
+    private static void readLinesAndAddToProducts(BufferedReader br, List<ProductsLoaderDTO> products)
+            throws IOException {
         String line;
         while ((line = br.readLine()) != null) {
             ProductsLoaderDTO dto = parseProductsLine(line);
@@ -53,7 +56,7 @@ public class ProductsLoader {
     }
 
     private static String parseNullValue(String value) {
-        if ("null".equals(value)) {
+        if (Constants.NULL.equals(value)) {
             return null;
         }
         return value;

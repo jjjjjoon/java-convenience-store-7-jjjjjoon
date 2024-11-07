@@ -1,6 +1,7 @@
 package store.model;
 
 import store.dto.ProductsLoaderDTO;
+import store.constant.ErrorMessage;
 
 public class Product {
     private final String name;
@@ -41,7 +42,8 @@ public class Product {
 
     private void sellException(int quantity) {
         if (this.quantity < quantity) {
-            throw new IllegalArgumentException("수량이 모자라여!!!");
+            throw new IllegalArgumentException(
+                    ErrorMessage.DEFAULT_HEADER_MESSAGE.getMessage() + ErrorMessage.TOO_MANY_QUANTITY.getMessage());
         }
     }
 }
