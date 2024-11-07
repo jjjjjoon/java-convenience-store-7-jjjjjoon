@@ -1,11 +1,13 @@
 package store.view;
 
+import store.constant.Message;
+
 public class OutputView {
     public void printWelcomeMessage() {
-        System.out.println(ViewMessage.OUTPUT_WELCOME_MESSAGE.getMessage());
+        System.out.println(Message.OUTPUT_WELCOME_MESSAGE.getMessage());
     }
 
     public void printOurProducts() {
-        System.out.println(ViewMessage.OUTPUT_OUR_PRODUCTS.getMessage());
+        System.out.println(Message.OUTPUT_OUR_PRODUCTS.getMessage());
     }
 }
