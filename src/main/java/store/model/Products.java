@@ -1,5 +1,6 @@
 package store.model;
 
+import store.dto.ProductDisplayDTO;
 import store.dto.ProductsLoaderDTO;
 import store.utils.ProductsLoader;
 
@@ -33,6 +34,19 @@ public class Products {
     // 전체 제품 목록 반환
     public List<Product> getAllProducts() {
         return new ArrayList<>(products);
+    }
+
+    public List<ProductDisplayDTO> getProductDisplayList() {
+        List<ProductDisplayDTO> displayList = new ArrayList<>();
+        for (Product product : products) {
+            displayList.add(new ProductDisplayDTO(
+                    product.getName(),
+                    product.getPrice(),
+                    product.getQuantity(),
+                    product.getPromotion()
+            ));
+        }
+        return displayList;
     }
 
 }
