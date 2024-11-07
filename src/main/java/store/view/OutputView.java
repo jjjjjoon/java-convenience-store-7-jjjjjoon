@@ -4,4 +4,8 @@ public class OutputView {
     public void printWelcomeMessage() {
         System.out.println(ViewMessage.OUTPUT_WELCOME_MESSAGE.getMessage());
     }
+
+    public void printOurProducts() {
+        System.out.println(ViewMessage.OUTPUT_OUR_PRODUCTS.getMessage());
+    }
 }
