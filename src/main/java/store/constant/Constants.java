@@ -11,6 +11,13 @@ public final class Constants {
     public static final String CLOSE_BRACKET = "]";
     public static final String INPUT_DELIMITER = "-";
     public static final String REPLACE_BLANK = "";
+    public static final String INPUT_SPLIT_REGEX = ",\\s*";
+    public static final String VALIDATE_COMPILE_PATTERN = "\\[(.+?)-([0-9]+)\\]";
+    public static final String EMPTY_NAME_PATTERN = "\\[ -[0-9]+\\]";
+    public static final String BLANK_QUANTITY_PATTERN = "\\[[^\\]]+- ]";
+    public static final String EMPTY_QUANTITY_PATTERN = "\\[[^\\]]+-\\]";
+    public static final String INVALID_MULTI_PURCHASE_PATTERN = "][";
+    public static final String VALID_MULTI_PURCHASE_PATTERN = "],[";
     private Constants() {
     }
 }
