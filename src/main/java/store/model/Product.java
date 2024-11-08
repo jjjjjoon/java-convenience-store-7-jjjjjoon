@@ -33,17 +33,16 @@ public class Product {
     }
 
     // 수량 감소 메서드
-    public void sell(int quantity) {
-        sellException(quantity);
-        if (this.quantity >= quantity) {
-            this.quantity -= quantity;
+    public void sell(int amount) {
+        sellException(amount);
+        if (this.quantity >= amount) {
+            this.quantity -= amount;
         }
     }
 
-    private void sellException(int quantity) {
-        if (this.quantity < quantity) {
-            throw new IllegalArgumentException(
-                    ErrorMessage.DEFAULT_HEADER_MESSAGE.getMessage() + ErrorMessage.TOO_MANY_QUANTITY.getMessage());
+    private void sellException(int amount) {
+        if (this.quantity < amount) {
+            throw new IllegalArgumentException(ErrorMessage.TOO_MANY_QUANTITY.getMessage());
         }
     }
 }

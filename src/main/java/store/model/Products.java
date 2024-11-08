@@ -1,5 +1,6 @@
 package store.model;
 
+import store.constant.ErrorMessage;
 import store.dto.ProductDisplayDTO;
 import store.dto.ProductsLoaderDTO;
 import store.utils.ProductsLoader;
@@ -49,4 +50,14 @@ public class Products {
         return displayList;
     }
 
+    public void decreaseInventory(List<String[]> purchasedItems) {
+        for (String[] item : purchasedItems) {
+            String name = item[0];
+            int quantity = Integer.parseInt(item[1]);
+
+            findProductByName(name)
+                    .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_NAME.getMessage()))
+                    .sell(quantity); // findProductByName으로 찾고 sell 호출
+        }
+    }
 }
