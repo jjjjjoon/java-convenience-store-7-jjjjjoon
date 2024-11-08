@@ -4,7 +4,8 @@ public enum ErrorMessage {
 
     DEFAULT_HEADER_MESSAGE("[Error] "),
     FAILED_LOAD_FILE("데이터 로딩에 실패했습니다."),
-    TOO_MANY_QUANTITY("수량이 모자랍니다.");
+    TOO_MANY_QUANTITY("수량이 모자랍니다."),
+    INVALID_INPUT_TYPE("형식은 [상품명-수량]이어야 합니다.");
 
     private String message;
 

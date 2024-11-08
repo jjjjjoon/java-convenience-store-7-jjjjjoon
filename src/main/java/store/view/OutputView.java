@@ -7,6 +7,7 @@ import store.constant.Message;
 import store.dto.ProductDisplayDTO;
 
 public class OutputView {
+
     public void printWelcomeMessage() {
         System.out.println(Message.OUTPUT_WELCOME_MESSAGE.getMessage());
     }
@@ -15,14 +16,14 @@ public class OutputView {
         System.out.println(Message.OUTPUT_OUR_PRODUCTS.getMessage());
     }
 
-    public static void printCurrentProducts(List<ProductDisplayDTO> products) {
+    public void printCurrentProducts(List<ProductDisplayDTO> products) {
         for (ProductDisplayDTO product : products) {
             String productInfo = formatProductInfo(product);
             System.out.println(productInfo);
         }
     }
 
-    private static String formatProductInfo(ProductDisplayDTO product) {
+    private String formatProductInfo(ProductDisplayDTO product) {
 
         String name = product.getName();
         int price = product.getPrice();
