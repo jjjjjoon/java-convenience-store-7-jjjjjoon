@@ -2,8 +2,7 @@ package store.model;
 
 import store.constant.ErrorMessage;
 import store.dto.ProductDisplayDTO;
-import store.dto.ProductsLoaderDTO;
-import store.utils.ProductsLoader;
+import store.utils.ResourcesLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +12,7 @@ public class Products {
     private final List<Product> products;
 
     public Products() {
-        this.products = new ArrayList<>();
-        loadProducts();
-    }
-
-    // ProductLoader를 통해 데이터를 로드하여 Product 리스트를 초기화
-    private void loadProducts() {
-        List<ProductsLoaderDTO> productList = ProductsLoader.loadProducts();
-        for (ProductsLoaderDTO dto : productList) {
-            products.add(new Product(dto));
-        }
+        this.products = ResourcesLoader.loadProducts(); // 직접 Product 리스트를 로드
     }
 
     // 특정 제품을 이름으로 찾는 메서드

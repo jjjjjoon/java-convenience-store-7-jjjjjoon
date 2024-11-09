@@ -10,13 +10,13 @@ import java.util.List;
 
 import store.constant.Constants;
 import store.constant.ErrorMessage;
-import store.dto.ProductsLoaderDTO;
 import store.dto.PromotionsLoaderDTO;
+import store.model.Product;
 
 public class ResourcesLoader {
     // 파일을 읽어와 ProductLoaderDTO 객체 리스트로 반환
-    public static List<ProductsLoaderDTO> loadProducts() {
-        List<ProductsLoaderDTO> products = new ArrayList<>();
+    public static List<Product> loadProducts() {
+        List<Product> products = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(Constants.PRODUCTS_FILE_PATH))) {
             br.readLine();
             readLinesAndAddToProducts(br, products);
@@ -27,25 +27,25 @@ public class ResourcesLoader {
         return products;
     }
 
-    private static void readLinesAndAddToProducts(BufferedReader br, List<ProductsLoaderDTO> products)
+    private static void readLinesAndAddToProducts(BufferedReader br, List<Product> products)
             throws IOException {
         String line;
         while ((line = br.readLine()) != null) {
-            ProductsLoaderDTO dto = parseProductsLine(line);
-            if (dto != null) {
-                products.add(dto);
+            Product product = parseProductsLine(line);
+            if (product != null) {
+                products.add(product);
             }
         }
     }
 
-    private static ProductsLoaderDTO parseProductsLine(String line) {
+    private static Product parseProductsLine(String line) {
         String[] values = splitLine(line);
         if (values.length == 4) {
             String name = values[0];
             int price = parseValues(values[1]);
             int quantity = parseValues(values[2]);
             String promotion = parseNullValue(values[3]);
-            return new ProductsLoaderDTO(name, price, quantity, promotion);
+            return new Product(name, price, quantity, promotion);
         }
         return null; // 데이터가 4개가 아닐 경우 null 반환
     }
