@@ -1,7 +1,8 @@
 package store.constant;
 
 public final class Constants {
-    public static final String FILE_PATH = "src/main/resources/products.md";
+    public static final String PRODUCTS_FILE_PATH = "src/main/resources/products.md";
+    public static final String PROMOTIONS_FILE_PATH = "src/main/resources/promotions.md";
     public static final String DELIMITER = ",";
     public static final String NULL = "null";
     public static final String NO_QUANTITY = "- %s %,d원 재고 없음";
