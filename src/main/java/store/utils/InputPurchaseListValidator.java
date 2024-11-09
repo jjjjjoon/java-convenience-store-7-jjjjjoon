@@ -47,7 +47,7 @@ public class InputPurchaseListValidator {
         while (matcher.find()) {
             String quantityStr = matcher.group(2);
             try {
-                int quantity = Integer.parseInt(quantityStr);
+                Integer quantity = Integer.parseInt(quantityStr);
                 if (quantity <= 0) {
                     throw new IllegalArgumentException(ErrorMessage.INVALID_POSITIVE_NUMBER.getMessage());
                 }

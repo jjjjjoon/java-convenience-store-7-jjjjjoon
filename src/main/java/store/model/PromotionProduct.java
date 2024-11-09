@@ -6,12 +6,12 @@ import store.dto.PromotionsLoaderDTO;
 import java.time.LocalDate;
 
 public class PromotionProduct extends Product {
-    private int promotionStock; // 프로모션 재고
-    private boolean isPromotion; // 프로모션 여부 확인
-    private final int buyQuantity; // 프로모션 조건: N개 구매 시
-    private final int freeQuantity; // 프로모션 조건: 1개 무료 제공
-    private final LocalDate startDate; // 프로모션 시작일
-    private final LocalDate endDate; // 프로모션 종료일
+    private Integer promotionStock; // 프로모션 재고
+    private Boolean isPromotion; // 프로모션 여부 확인
+    private Integer buyQuantity; // 프로모션 조건: N개 구매 시
+    private Integer freeQuantity; // 프로모션 조건: 1개 무료 제공
+    private LocalDate startDate; // 프로모션 시작일
+    private LocalDate endDate; // 프로모션 종료일
 
     // PromotionProduct 생성자
     public PromotionProduct(ProductsLoaderDTO productDto, PromotionsLoaderDTO promoDto) {
@@ -26,12 +26,6 @@ public class PromotionProduct extends Product {
             this.freeQuantity = promoDto.getFreeQuantity();
             this.startDate = promoDto.getStartDate();
             this.endDate = promoDto.getEndDate();
-        } else {
-            this.promotionStock = 0; // 프로모션 재고는 0으로 설정
-            this.buyQuantity = 0;
-            this.freeQuantity = 0;
-            this.startDate = null;
-            this.endDate = null;
         }
     }
 
@@ -42,38 +36,50 @@ public class PromotionProduct extends Product {
     }
 
     // 프로모션 상품 판매 메서드
-    public int calculatePromotionDiscount(int requestedQuantity) {
+    public Integer calculatePromotionDiscount(Integer requestedQuantity) {
         if (!isPromotionActive()) {
             return 0; // 프로모션이 유효하지 않은 경우 할인 없음
         }
 
-        int totalPaidQuantity = 0;
-        int totalFreeQuantity = 0;
+        Integer totalFreeQuantity = applyPromotionDiscount(requestedQuantity);
+        Integer remainingQuantity = requestedQuantity % buyQuantity;
 
-        // 프로모션 재고와 기본 재고를 모두 고려한 할인 적용
+        if (remainingQuantity > 0) {
+            sellRemainingQuantity(remainingQuantity); // 남은 수량은 기본 재고에서 차감
+        }
+
+        return totalFreeQuantity;
+    }
+
+    // 프로모션 할인 계산 로직을 분리
+    private Integer applyPromotionDiscount(Integer requestedQuantity) {
+        Integer totalPaidQuantity = 0;
+        Integer totalFreeQuantity = 0;
+
         while (requestedQuantity >= buyQuantity && promotionStock >= buyQuantity) {
             totalPaidQuantity += buyQuantity;
             totalFreeQuantity += freeQuantity;
             promotionStock -= buyQuantity;
             requestedQuantity -= buyQuantity;
         }
-
-        if (requestedQuantity > 0) {
-            sell(requestedQuantity); // 남은 수량은 기본 재고에서 차감
-            totalPaidQuantity += requestedQuantity;
-        }
-
-        return totalFreeQuantity; // 증정 상품 수량 반환
+        return totalFreeQuantity;
     }
 
+    // 기본 재고에서 남은 수량 판매 처리
+    private void sellRemainingQuantity(Integer remainingQuantity) {
+        sell(remainingQuantity); // 기본 재고에서 남은 수량 차감
+    }
+
+
     // 프로모션 할인을 포함한 결제 금액 계산 메서드
-    public int calculateTotalPrice(int requestedQuantity) {
-        int freeItems = calculatePromotionDiscount(requestedQuantity);
-        int totalPrice = (requestedQuantity - freeItems) * getPrice();
+    public Integer calculateTotalPrice(Integer requestedQuantity) {
+        Integer freeItems = calculatePromotionDiscount(requestedQuantity);
+        Integer totalPrice = (requestedQuantity - freeItems) * getPrice();
         return totalPrice;
     }
 
-    public int getPromotionStock() {
+    public Integer getPromotionStock() {
         return promotionStock;
     }
+
 }

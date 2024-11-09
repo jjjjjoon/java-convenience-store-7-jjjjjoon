@@ -4,11 +4,11 @@ import store.constant.ErrorMessage;
 
 public class ProductsLoaderDTO {
     private final String name;
-    private final int price;
-    private int quantity; // 수량은 상태값으로 동적으로 관리
+    private final Integer price;
+    private Integer quantity; // 수량은 상태값으로 동적으로 관리
     private final String promotion;
 
-    public ProductsLoaderDTO(String name, int price, int quantity, String promotion) {
+    public ProductsLoaderDTO(String name, Integer price, Integer quantity, String promotion) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -18,11 +18,11 @@ public class ProductsLoaderDTO {
         return name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 

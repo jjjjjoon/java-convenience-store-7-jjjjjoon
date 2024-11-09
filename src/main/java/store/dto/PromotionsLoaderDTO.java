@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class PromotionsLoaderDTO {
     private final String promotionName;
-    private final int buyQuantity;
-    private final int freeQuantity;
+    private final Integer buyQuantity;
+    private final Integer freeQuantity;
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    public PromotionsLoaderDTO(String promotionName, int buyQuantity, int freeQuantity, LocalDate startDate, LocalDate endDate) {
+    public PromotionsLoaderDTO(String promotionName, Integer buyQuantity, Integer freeQuantity, LocalDate startDate, LocalDate endDate) {
         this.promotionName = promotionName;
         this.buyQuantity = buyQuantity;
         this.freeQuantity = freeQuantity;
@@ -21,11 +21,11 @@ public class PromotionsLoaderDTO {
         return promotionName;
     }
 
-    public int getBuyQuantity() {
+    public Integer getBuyQuantity() {
         return buyQuantity;
     }
 
-    public int getFreeQuantity() {
+    public Integer getFreeQuantity() {
         return freeQuantity;
     }
 

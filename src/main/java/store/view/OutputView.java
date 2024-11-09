@@ -10,9 +10,6 @@ public class OutputView {
 
     public void printWelcomeMessage() {
         System.out.println(Message.OUTPUT_WELCOME_MESSAGE.getMessage());
-    }
-
-    public void printOurProducts() {
         System.out.println(Message.OUTPUT_OUR_PRODUCTS.getMessage());
     }
 
@@ -26,8 +23,8 @@ public class OutputView {
     private String formatProductInfo(ProductDisplayDTO product) {
 
         String name = product.getName();
-        int price = product.getPrice();
-        int quantity = product.getQuantity();
+        Integer price = product.getPrice();
+        Integer quantity = product.getQuantity();
         String promotion = product.getPromotion();
 
         if (quantity == 0) {

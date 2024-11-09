@@ -23,7 +23,7 @@ public class InputPurchaseListHandler {
             validator.validate(item);
 
             String name = extractProductName(item);
-            int quantity = extractQuantity(item);
+            Integer quantity = extractQuantity(item);
 
             productList.add(new String[]{name, String.valueOf(quantity)});
         }
@@ -32,13 +32,13 @@ public class InputPurchaseListHandler {
     }
 
     private String extractProductName(String item) {
-        int hyphenIndex = item.indexOf(Constants.INPUT_DELIMITER);
+        Integer hyphenIndex = item.indexOf(Constants.INPUT_DELIMITER);
         return item.substring(1, hyphenIndex).trim();
     }
 
-    private int extractQuantity(String item) {
-        int hyphenIndex = item.indexOf(Constants.INPUT_DELIMITER);
-        int endBracketIndex = item.indexOf(Constants.CLOSE_BRACKET);
+    private Integer extractQuantity(String item) {
+        Integer hyphenIndex = item.indexOf(Constants.INPUT_DELIMITER);
+        Integer endBracketIndex = item.indexOf(Constants.CLOSE_BRACKET);
         return Integer.parseInt(item.substring(hyphenIndex + 1, endBracketIndex).trim());
     }
 }

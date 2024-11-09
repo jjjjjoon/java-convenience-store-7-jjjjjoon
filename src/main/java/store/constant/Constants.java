@@ -19,6 +19,9 @@ public final class Constants {
     public static final String EMPTY_QUANTITY_PATTERN = "\\[[^\\]]+-\\]";
     public static final String INVALID_MULTI_PURCHASE_PATTERN = "][";
     public static final String VALID_MULTI_PURCHASE_PATTERN = "],[";
+    public static final Double DISCOUNT_RATE = 0.3;
+    public static final Integer MAX_DISCOUNT_AMOUNT = 8000;
+
     private Constants() {
     }
 }

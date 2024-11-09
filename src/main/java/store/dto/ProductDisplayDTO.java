@@ -2,11 +2,11 @@ package store.dto;
 
 public class ProductDisplayDTO {
     private final String name;
-    private final int price;
-    private final int quantity;
+    private final Integer price;
+    private final Integer quantity;
     private final String promotion;
 
-    public ProductDisplayDTO(String name, int price, int quantity, String promotion) {
+    public ProductDisplayDTO(String name, Integer price, Integer quantity, String promotion) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -17,11 +17,11 @@ public class ProductDisplayDTO {
         return name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
