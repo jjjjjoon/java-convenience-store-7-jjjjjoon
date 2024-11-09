@@ -1,14 +1,14 @@
-package store.model;
+package store.dto;
 
 import store.constant.ErrorMessage;
 
-public class Product {
+public class ProductsLoaderDTO {
     private final String name;
     private final int price;
     private int quantity; // 수량은 상태값으로 동적으로 관리
     private final String promotion;
 
-    public Product(String name, int price, int quantity, String promotion) {
+    public ProductsLoaderDTO(String name, int price, int quantity, String promotion) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -30,17 +30,4 @@ public class Product {
         return promotion;
     }
 
-    // 수량 감소 메서드
-    public void sell(int amount) {
-        sellException(amount);
-        if (this.quantity >= amount) {
-            this.quantity -= amount;
-        }
-    }
-
-    private void sellException(int amount) {
-        if (this.quantity < amount) {
-            throw new IllegalArgumentException(ErrorMessage.TOO_MANY_QUANTITY.getMessage());
-        }
-    }
 }

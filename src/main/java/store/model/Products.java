@@ -2,6 +2,7 @@ package store.model;
 
 import store.constant.ErrorMessage;
 import store.dto.ProductDisplayDTO;
+import store.dto.ProductsLoaderDTO;
 import store.utils.ResourcesLoader;
 
 import java.util.ArrayList;
@@ -11,8 +12,11 @@ import java.util.Optional;
 public class Products {
     private final List<Product> products;
 
-    public Products() {
-        this.products = ResourcesLoader.loadProducts(); // 직접 Product 리스트를 로드
+    public Products(List<ProductsLoaderDTO> dtos) {
+        this.products = new ArrayList<>();
+        for (ProductsLoaderDTO dto : dtos) {
+            this.products.add(new Product(dto));
+        }
     }
 
     // 특정 제품을 이름으로 찾는 메서드
