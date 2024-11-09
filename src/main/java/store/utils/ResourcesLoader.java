@@ -10,7 +10,6 @@ import java.util.List;
 
 import store.constant.Constants;
 import store.constant.ErrorMessage;
-import store.dto.PromotionsLoaderDTO;
 import store.model.Product;
 
 public class ResourcesLoader {
