@@ -17,17 +17,17 @@ public class InputView {
     }
 
     public String getRepeatPurchaseResponse() {
-        System.out.println("구매하고 싶은 다른 상품이 있나요? (Y/N)");
+        System.out.println(Message.REPEAT_PURCHASE_RESPONSE.getMessage());
         return Console.readLine();
     }
 
     public String getAdditionalPurchaseResponse(int neededQuantity, String productName) {
-        System.out.printf("%s 상품을 %d개 더 구매하시면 추가 혜택을 받을 수 있습니다. 추가 구매하시겠습니까? (Y/N)%n", productName, neededQuantity);
+        System.out.printf(Message.ADDITIONAL_PURCHASE_RESPONSE.getMessage(), productName, neededQuantity);
         return Console.readLine();
     }
 
     public String getExceedPromotionPurchaseResponse(String productName, int nonPromoQuantity) {
-        System.out.printf("%s 상품 중 %d개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)%n", productName, nonPromoQuantity);
+        System.out.printf(Message.EXCEED_PROMOTION_PURCHASE_RESPONSE.getMessage(), productName, nonPromoQuantity);
         return Console.readLine();
     }
 }
