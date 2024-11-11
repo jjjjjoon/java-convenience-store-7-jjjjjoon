@@ -1,4 +1,4 @@
-package store.Controller;
+package store.controller;
 
 import java.util.ArrayList;
 import store.constant.ErrorMessage;

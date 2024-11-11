@@ -1,6 +1,6 @@
 package store;
 
-import store.Controller.ConvenienceStoreController;
+import store.controller.ConvenienceStoreController;
 
 public class Application {
     public static void main(String[] args) {
