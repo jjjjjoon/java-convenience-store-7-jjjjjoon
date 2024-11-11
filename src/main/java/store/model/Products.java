@@ -20,14 +20,12 @@ public class Products {
         }
     }
 
-    // 특정 제품을 이름으로 찾는 메서드
     public Optional<Product> findProductByName(String name) {
         return product.stream()
                 .filter(product -> product.getName().equalsIgnoreCase(name))
                 .findFirst();
     }
 
-    // 전체 제품 목록 반환
     public List<Product> getAllProducts() {
         return new ArrayList<>(product);
     }
@@ -52,7 +50,7 @@ public class Products {
 
             findProductByName(name)
                     .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_NAME.getMessage()))
-                    .sell(quantity); // findProductByName으로 찾고 sell 호출
+                    .sell(quantity);
         }
     }
 
@@ -63,7 +61,7 @@ public class Products {
             Integer discount = discountCalculator.calculateDiscount(amount);
             return amount - discount;
         }
-        return amount; // 할인 없이 그대로 반환
+        return amount;
     }
 
     public Integer calculateTotalAmount(List<String[]> purchasedItems) {
@@ -74,7 +72,6 @@ public class Products {
             Product product = findProductByName(name)
                     .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_NAME.getMessage()));
 
-            // 개별 상품의 총 금액을 누적하여 계산
             totalAmount += product.getPrice() * quantity;
         }
         return totalAmount;
@@ -90,11 +87,10 @@ public class Products {
             Product product = findProductByName(productName)
                     .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_NAME.getMessage()));
 
-            // ProductDisplayDTO 생성 및 리스트에 추가
             displayItems.add(new ProductDisplayDTO(
                     product.getName(),
                     product.getPrice(),
-                    quantity,       // 요청한 구매 수량으로 설정
+                    quantity,
                     product.getPromotion()
             ));
         }

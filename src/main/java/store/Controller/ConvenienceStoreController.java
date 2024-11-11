@@ -46,11 +46,10 @@ public class ConvenienceStoreController {
 
             // Step 7-10: 구매 처리
             processPurchase(parsedItems);
-            return null; // void 반환을 위한 처리
+            return null;
         });
     }
 
-    // 재시도 로직 메소드
     private <T> T retryUntilValid(InputSupplier<T> supplier) {
         while (true) {
             try {
@@ -133,7 +132,7 @@ public class ConvenienceStoreController {
                 outputView.printCurrentProducts(products.getProductDisplayList());
                 parsedItems = retryUntilValid(() -> {
                     String userInput = inputView.getNameAndQuantity();
-                    validator.validate(userInput); // 유효성 검증
+                    validator.validate(userInput);
                     return purchaseListHandler.parseInput(userInput);
                 });
             }

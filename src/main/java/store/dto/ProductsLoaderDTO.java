@@ -4,7 +4,7 @@ package store.dto;
 public class ProductsLoaderDTO {
     private final String name;
     private final Integer price;
-    private Integer quantity; // 수량은 상태값으로 동적으로 관리
+    private Integer quantity;
     private final String promotion;
 
     public ProductsLoaderDTO(String name, Integer price, Integer quantity, String promotion) {

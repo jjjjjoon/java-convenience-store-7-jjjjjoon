@@ -14,7 +14,6 @@ import store.dto.ProductsLoaderDTO;
 import store.dto.PromotionsLoaderDTO;
 
 public class ResourcesLoader {
-    // 파일을 읽어와 ProductLoaderDTO 객체 리스트로 반환
     public static List<ProductsLoaderDTO> loadProducts() {
         List<ProductsLoaderDTO> products = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(Constants.PRODUCTS_FILE_PATH))) {
@@ -47,7 +46,7 @@ public class ResourcesLoader {
             String promotion = parseNullValue(values[3]);
             return new ProductsLoaderDTO(name, price, quantity, promotion);
         }
-        return null; // 데이터가 4개가 아닐 경우 null 반환
+        return null;
     }
 
     private static String[] splitLine(String line) {
@@ -99,6 +98,6 @@ public class ResourcesLoader {
             LocalDate endDate = LocalDate.parse(values[4], formatter);
             return new PromotionsLoaderDTO(PromotionName, buyQuantity, freeQuantity, startDate, endDate);
         }
-        return null; // 데이터가 4개가 아닐 경우 null 반환
+        return null;
     }
 }

@@ -12,7 +12,7 @@ public class Product {
     public Product(ProductsLoaderDTO dto) {
         this.name = dto.getName();
         this.price = dto.getPrice();
-        this.quantity = dto.getQuantity();  // promotion이 null일 때만 기본 재고로 설정
+        this.quantity = dto.getQuantity();
         this.promotion = dto.getPromotion();
     }
 
@@ -32,7 +32,6 @@ public class Product {
         return promotion;
     }
 
-    // 수량 감소 메서드
     public void sell(Integer amount) {
         sellException(amount);
         if (this.quantity >= amount) {

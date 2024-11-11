@@ -12,7 +12,7 @@ public class InputView {
 
     public static String getMembershipDiscountInput() {
         System.out.println(Message.INPUT_MEMBERSHIP_DISCOUNT.getMessage());
-        String input = Console.readLine(); // 사용자 입력
+        String input = Console.readLine();
         return input;
     }
 

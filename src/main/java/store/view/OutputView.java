@@ -18,13 +18,12 @@ public class OutputView {
         NumberFormat formatter = NumberFormat.getInstance(Locale.KOREA);
 
         for (ProductDisplayDTO product : products) {
-            String priceFormatted = formatter.format(product.getPrice()); // 가격에 쉼표 적용
+            String priceFormatted = formatter.format(product.getPrice());
 
-            // 재고가 없는 경우 "재고 없음" 메시지 출력
             if (product.getQuantity() == 0) {
                 System.out.printf(Message.PRINT_NO_QUANTITY_LIST.getMessage(), product.getName(), priceFormatted);
             } else {
-                String quantityFormatted = formatter.format(product.getQuantity()); // 수량에 쉼표 적용
+                String quantityFormatted = formatter.format(product.getQuantity());
                 System.out.printf(Message.DEFAULT_PRINT_PRODUCT_LIST.getMessage(), product.getName(), priceFormatted, quantityFormatted);
             }
 
