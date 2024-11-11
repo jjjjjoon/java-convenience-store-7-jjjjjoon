@@ -1,6 +1,5 @@
 package store.dto;
 
-import store.constant.ErrorMessage;
 
 public class ProductsLoaderDTO {
     private final String name;
