@@ -1,5 +1,33 @@
 # 🛒우아한 편의점에 오신걸 환영합니다!!🛒
 
+## 플로우
+
+1. products.md, promotions.md 불러와서 모델에 저장
+2. welcome 문구 출력
+3. 각 모델 데이터 값 불러온 후 상품 재고 출력
+4. 구매 목록 입력
+5. 사용자 입력 후 유효성 검증
+    - 5-1. 유효성 검증 실패-> 예외 처리 후 **4번으로**
+    - 5-2. 유효성 검증 완료 -> **6번으로**
+6. 입력받은 문자열 분리 후 상품명과 수량으로 나눠준다.
+7. 상품명 대조 후 프로모션 해당인지 아닌지 확인
+    - 7-1. 프로모션 해당 -> 프로모션 재고부터 소진
+        - 7-1-a. 예를 들어 2+1 인데 4,5개 처럼 안나누어 떨어질 경우 -> 사용자에게 몇개 더 사면 더 프로모션으로 몇 개 받을 수 있다고 알려준다.
+            - 7-1-a-i. Y - ex) 6개로 구매 수량 수정 후 **8단계로**
+            - 7-1-a-j. N - ex) 3개는 프로모션, 나머지는 프로모션 제외 **8단계로**
+        - 7-1-b. 2+1인데 딱 나누어떨어질 경우 **8단계로**
+        - 7-1-c. 2+1 프로모션재고 10개, 기본재고 10개 인데 프로모션 재고 이상으로 살 경우 초과된 개수는 프로모션 적용 안되는데 사용자 입력 물어봄.
+             - 7-1-c-i. 산다 - 프로모션 재고 전체 소진 후 기본재고 소진, 13개 산다고 하면 6+3은 적용, 4개는 프로모션 제외 총 10개 값 **8단계**
+             - 7-1-c-j. 안산다 - 그러면 **4번으로**
+    - 7-2. 기본재고만 있는 상품은 기본재고 바로 소진 **8번으로**
+8. 멤버십 할인
+    - 8-1. 받는다 - 프로모션 제외 30%(최대 8000원)
+    - 8-2. 안받는다 - 바로 결제
+9. 영수증 출력
+10. 추가 구매
+    - 10-1. Y 다시 **2번으로**
+    - 10-2. N 프로그램 종료
+
 ## 기능 구현 목록
 
 ---
@@ -42,11 +70,52 @@
 - 영수증의 구성 요소를 보기 좋게 정렬하여 고객이 쉽게 금액과 수량을 확인할 수 있게 한다.
 
 ---
-## 예외 처리 목록
+## 예외 처리 
 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같은 명확한 유형을 처리한다.
 
-
 ---
 ## 디렉토리 구조
-
+```
+src
+└── main
+├── java
+│   └── store
+│       ├── Application
+│       │
+│       ├── constant
+│       │   ├── Constants
+│       │   ├── ErrorMessage
+│       │   └── Message
+│       │
+│       ├── controller
+│       │   └── ConvenienceStoreController
+│       │
+│       ├── dto
+│       │   ├── DiscountInfoDTO
+│       │   ├── ProductDisplayDTO
+│       │   ├── ProductsLoaderDTO
+│       │   └── PromotionsLoaderDTO
+│       │
+│       ├── model
+│       │   ├── Product
+│       │   ├── Products
+│       │   └── PromotionProduct
+│       │
+│       ├── service
+│       │   └── MembershipDiscount
+│       │
+│       ├── utils
+│       │   ├── InputPurchaseListHandler
+│       │   ├── InputPurchaseListValidator
+│       │   ├── InputSupplier
+│       │   └── ResourcesLoader
+│       │
+│       └── view
+│           ├── InputView
+│           └── OutputView
+│
+└── resources
+    ├── products.md
+    └── promotions.md
+```
