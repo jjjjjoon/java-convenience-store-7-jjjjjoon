@@ -2,9 +2,9 @@ package store.constant;
 
 public enum ErrorMessage {
 
-    DEFAULT_HEADER_MESSAGE("[Error] "),
+    DEFAULT_HEADER_MESSAGE("[ERROR] "),
     FAILED_LOAD_FILE("데이터 로딩에 실패했습니다."),
-    TOO_MANY_QUANTITY("수량이 모자랍니다."),
+    TOO_MANY_QUANTITY("재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요."),
     INVALID_INPUT_TYPE("형식은 [상품명-수량]이어야 합니다."),
     INVALID_BRACKET("입력에 대괄호가 올바르게 포함되지 않았습니다."),
     INVALID_BLANK_NAME("상품명이 비어 있거나 공백입니다."),
