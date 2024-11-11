@@ -11,6 +11,10 @@ public class DiscountInfoDTO {
         this.eventDiscountAmount = 0;
     }
 
+    public Integer getTotalAmount() {
+        return totalAmount;
+    }
+
     public void applyMembershipDiscount(Integer discountAmount) {
         this.membershipDiscountAmount = discountAmount;
     }
