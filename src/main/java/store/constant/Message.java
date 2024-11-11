@@ -17,6 +17,7 @@ public enum Message {
     RECEIPT_EVENT_DISCOUNT("행사할인\t\t\t-%s원%n"),
     RECEIPT_MEMBERSHIP_DISCOUNT("멤버십할인\t\t\t-%s원%n"),
     RECEIPT_FINAL_AMOUNT("내실돈\t\t\t%s원%n"),
+    RECEIPT_GIFT_BODY("%s\t\t%d개\n"),
     GOODBYE_MESSAGE("감사합니다. 다음에 또 방문해 주세요!"),
     PRINT_NO_QUANTITY_LIST("- %s %s원 재고 없음"),
     DEFAULT_PRINT_PRODUCT_LIST("- %s %s원 %s개"),
