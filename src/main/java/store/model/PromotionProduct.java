@@ -82,4 +82,19 @@ public class PromotionProduct extends Product {
         return promotionStock;
     }
 
+    public Integer getBuyQuantity() {
+        return buyQuantity;
+    }
+
+    public Integer getFreeQuantity() {
+        return freeQuantity;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 }
