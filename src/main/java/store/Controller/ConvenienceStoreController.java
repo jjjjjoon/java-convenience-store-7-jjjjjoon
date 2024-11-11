@@ -1,5 +1,6 @@
 package store.Controller;
 
+import java.util.ArrayList;
 import store.constant.ErrorMessage;
 import store.dto.DiscountInfoDTO;
 import store.dto.ProductDisplayDTO;
@@ -60,13 +61,14 @@ public class ConvenienceStoreController {
     }
 
     private void processPurchase(List<String[]> parsedItems) {
-        parsedItems.forEach(this::processItem);
+        List<ProductDisplayDTO> gifts = new ArrayList<>();
+        parsedItems.forEach(item -> processItem(item, gifts));
         applyMembershipDiscount(parsedItems);
-        printReceipt(parsedItems);
+        printReceipt(parsedItems, gifts);
         handleRepeatPurchase(parsedItems);
     }
 
-    private void processItem(String[] item) {
+    private void processItem(String[] item, List<ProductDisplayDTO> gifts) {
         String productName = item[0];
         Integer quantity = Integer.parseInt(item[1]);
 
@@ -74,15 +76,19 @@ public class ConvenienceStoreController {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_NAME.getMessage()));
 
         if (product instanceof PromotionProduct) {
-            handlePromotionProduct((PromotionProduct) product, quantity);
+            handlePromotionProduct((PromotionProduct) product, quantity, gifts);
         } else {
             product.sell(quantity);
         }
     }
 
-    private void handlePromotionProduct(PromotionProduct promotionProduct, Integer quantity) {
+    private void handlePromotionProduct(PromotionProduct promotionProduct, Integer quantity, List<ProductDisplayDTO> gifts) {
         Integer promoStockUsed = promotionProduct.calculatePromotionDiscount(quantity);
         Integer remainingQuantity = quantity - promoStockUsed;
+
+        if (promoStockUsed > 0) {
+            gifts.add(new ProductDisplayDTO(promotionProduct.getName(), promotionProduct.getPrice(), promoStockUsed, promotionProduct.getPromotion()));
+        }
 
         handlePromotionQuantity(promotionProduct, remainingQuantity, quantity, promoStockUsed);
     }
@@ -130,11 +136,11 @@ public class ConvenienceStoreController {
         }
     }
 
-    private void printReceipt(List<String[]> parsedItems) {
+    private void printReceipt(List<String[]> parsedItems, List<ProductDisplayDTO> gifts) {
         List<ProductDisplayDTO> displayItems = products.convertToDisplayDTO(parsedItems);
         DiscountInfoDTO discountInfo = new DiscountInfoDTO(products.calculateTotalAmount(parsedItems));
         Integer finalAmount = discountInfo.getFinalAmount();
-        outputView.printReceipt(displayItems, discountInfo.getTotalAmount(), discountInfo.getEventDiscountAmount(),
+        outputView.printReceipt(displayItems, gifts, discountInfo.getTotalAmount(), discountInfo.getEventDiscountAmount(),
                 discountInfo.getMembershipDiscountAmount(), finalAmount);
     }
 

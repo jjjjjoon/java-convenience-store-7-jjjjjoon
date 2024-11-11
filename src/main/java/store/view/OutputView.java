@@ -50,17 +50,32 @@ public class OutputView {
         System.out.print(Message.SPACE.getMessage() + product.getPromotion());
     }
 
-    public void printReceipt(List<ProductDisplayDTO> items, Integer totalAmount, Integer eventDiscount, Integer membershipDiscount, Integer finalAmount) {
+    public void printReceipt(List<ProductDisplayDTO> items, List<ProductDisplayDTO> gifts, Integer totalAmount, Integer eventDiscount, Integer membershipDiscount, Integer finalAmount) {
+        NumberFormat formatter = NumberFormat.getInstance(Locale.KOREA);
+
         System.out.println(Message.WOOWA_CONVENIENCE_STORE.getMessage());
         System.out.println(Message.RECEIPT_HEADER.getMessage());
 
-        items.forEach(this::printReceiptItem);
+        for (ProductDisplayDTO item : items) {
+            String itemTotalPrice = formatter.format(item.getPrice() * item.getQuantity());
+            System.out.printf(Message.RECEIPT_BODY.getMessage(), item.getName(), item.getQuantity(), itemTotalPrice);
+        }
 
         System.out.println(Message.RECEIPT_PROMOTION_HEADER.getMessage());
-        System.out.println(Message.RECEIPT_DIVIDE_LINE.getMessage());
+        if (gifts != null && !gifts.isEmpty()) {
+            for (ProductDisplayDTO gift : gifts) {
+                System.out.printf(Message.RECEIPT_GIFT_BODY.getMessage(), gift.getName(), gift.getQuantity());
+            }
+        }
+        System.out.println();
 
-        printReceiptSummary(items.size(), totalAmount, eventDiscount, membershipDiscount, finalAmount);
+        System.out.println(Message.RECEIPT_DIVIDE_LINE.getMessage());
+        System.out.printf(Message.RECEIPT_TOTAL_AMOUNT.getMessage(), items.size(), formatter.format(totalAmount));
+        System.out.printf(Message.RECEIPT_EVENT_DISCOUNT.getMessage(), formatter.format(eventDiscount));
+        System.out.printf(Message.RECEIPT_MEMBERSHIP_DISCOUNT.getMessage(), formatter.format(membershipDiscount));
+        System.out.printf(Message.RECEIPT_FINAL_AMOUNT.getMessage(), formatter.format(finalAmount));
     }
+
 
     private void printReceiptItem(ProductDisplayDTO item) {
         String itemTotalPrice = formatter.format(item.getPrice() * item.getQuantity());
